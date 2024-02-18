@@ -58,7 +58,7 @@ services:
     container_name: payment
     networks:
       - roboshop 
-  depends_on:
+    depends_on:
       - rabbitmq
       - 
   web:
