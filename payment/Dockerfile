@@ -5,4 +5,6 @@ WORKDIR /app
 COPY requirements.txt /app/
 RUN pip install -r requirements.txt
 COPY *.py /app/
+ENV AMQP_USER=roboshop \
+    AMQP_PASS=roboshop123
 CMD ["uwsgi", "--ini", "payment.ini"]
