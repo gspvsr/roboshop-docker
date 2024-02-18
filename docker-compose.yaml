@@ -52,8 +52,15 @@ services:
     image: rabbitmq
     container_name: rabbitmq
     networks:
-      - roboshop
-      
+      - roboshop 
+  payment:
+    image: payment
+    container_name: payment
+    networks:
+      - roboshop 
+  depends_on:
+      - rabbitmq
+      - 
   web:
     image: web:v1
     container_name: web
