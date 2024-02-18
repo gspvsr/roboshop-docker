@@ -48,6 +48,12 @@ services:
     depends_on:
       - cart
       - mysql
+  rabbitmq:
+    image: rabbitmq
+    container_name: rabbitmq
+    networks:
+      - roboshop
+      
   web:
     image: web:v1
     container_name: web
