@@ -1,9 +1,10 @@
 # this is multi stage buit
-FROM alpine as build
+FROM maven AS build
 WORKDIR /opt/shipping
-COPY SRC /opt/shipping
-COPY POM.XML /opt/shipping
-CMD ["mvn", "--version"]
+COPY pom.xml /opt/shipping/
+RUN mvn dependency:resolve
+COPY src /opt/shipping/src/
+RUN mvn package
 
 # run 
 FROM openjdk:8-jre-alpine3.9
