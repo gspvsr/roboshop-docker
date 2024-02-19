@@ -1,19 +1,16 @@
 # Use Python Alpine base image
-FROM python:3.9-alpine
+FROM python:3.9-alpine3.14
 
 # Expose port 8080
 EXPOSE 8080
-
-# Switch to root user temporarily to perform installation
-USER root
 
 # Set working directory
 WORKDIR /app
 
 # Copy requirements file and install dependencies
 COPY requirements.txt /app/
-RUN apk --no-cache add build-base linux-headers && \
-    pip install --upgrade pip setuptools && \
+RUN pip install --upgrade pip setuptools && \
+    apk --no-cache add gcc g++ && \
     pip install -r requirements.txt
 
 # Copy Python files and payment.ini
