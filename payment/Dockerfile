@@ -1,22 +1,14 @@
-# Use Alpine Linux base image
-FROM alpine:latest
-
-
-# Set working directory
+FROM python:3.9-alpine
+EXPOSE 8080
+USER root
 WORKDIR /app
-
-# Copy requirements file and install dependencies
 COPY requirements.txt /app/
-RUN pip3 install --upgrade pip setuptools && \
-    pip3 install -r requirements.txt
-
-# Copy Python files and payment.ini
+RUN apk --no-cache add build-base linux-headers
+RUN pip install --upgrade setuptools
+RUN pip install -r requirements.txt
 COPY *.py /app/
 COPY payment.ini /app/
-
-# Set environment variables
 ENV AMQP_USER=roboshop \
     AMQP_PASS=roboshop123
-
-# Define the command to run the application using uwsgi with the provided configuration
+#CMD ["python", "payment.py"]
 CMD ["uwsgi", "--ini", "payment.ini"]
