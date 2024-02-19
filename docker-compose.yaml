@@ -57,7 +57,7 @@ services:
     - RABBITMQ_DEFAULT_USER=roboshop
     - RABBITMQ_DEFAULT_PASS=roboshop123
   payment:
-    image: payment
+    image: payment:v1
     container_name: payment
     networks:
       - roboshop 
