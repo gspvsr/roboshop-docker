@@ -1,8 +1,6 @@
 # Use Alpine Linux base image
 FROM alpine:latest
 
-# Install Python and required packages
-RUN apk --no-cache add python3 py3-pip gcc g++ linux-headers
 
 # Set working directory
 WORKDIR /app
