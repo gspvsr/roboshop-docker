@@ -1,17 +1,16 @@
-# Use Python Alpine base image
-FROM python:3.9-alpine3.14
+# Use Alpine Linux base image
+FROM alpine:latest
 
-# Expose port 8080
-EXPOSE 8080
+# Install Python and required packages
+RUN apk --no-cache add python3 py3-pip gcc g++ linux-headers
 
 # Set working directory
 WORKDIR /app
 
 # Copy requirements file and install dependencies
 COPY requirements.txt /app/
-RUN pip install --upgrade pip setuptools && \
-    apk --no-cache add gcc g++ && \
-    pip install -r requirements.txt
+RUN pip3 install --upgrade pip setuptools && \
+    pip3 install -r requirements.txt
 
 # Copy Python files and payment.ini
 COPY *.py /app/
