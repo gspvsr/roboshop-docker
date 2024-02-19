@@ -5,6 +5,7 @@ volumes:
   mongodb:
   mysql:
   rabbitmq:
+
 services:
   mongodb:
     image: gspvsr/mongodb:v1
@@ -15,6 +16,7 @@ services:
     - source: mongodb
       target: /data/db
       type : volume
+
   catalogue:
     image: gspvsr/catalogue:v1
     container_name: catalogue
@@ -22,6 +24,7 @@ services:
       - roboshop
     depends_on:
       - mongodb
+
   redis:
     image: redis
     container_name: redis
@@ -39,6 +42,7 @@ services:
     depends_on:
       - mongodb
       - redis
+
   cart:
     image: gspvsr/cart:v1
     container_name: cart
@@ -47,6 +51,7 @@ services:
     depends_on:
       - catalogue
       - redis
+
   mysql:
     image: gspvsr/mysql:v1
     container_name: mysql
@@ -74,6 +79,7 @@ services:
     - source: rabbitmq
       target: /var/lib/rabbitmq
       type : volume
+      
     environment:
     - RABBITMQ_DEFAULT_USER=roboshop
     - RABBITMQ_DEFAULT_PASS=roboshop123
